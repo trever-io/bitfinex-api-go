@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/common"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/pulse"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/pulseprofile"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/common"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/pulse"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/pulseprofile"
 )
 
 func TestPublicPulseProfile(t *testing.T) {

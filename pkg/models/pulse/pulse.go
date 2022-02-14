@@ -3,8 +3,8 @@ package pulse
 import (
 	"fmt"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/convert"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/pulseprofile"
+	"github.com/trever-io/bitfinex-api-go/pkg/convert"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/pulseprofile"
 )
 
 // Pulse message data structure

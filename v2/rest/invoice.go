@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/common"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/invoice"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/common"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/invoice"
 )
 
 // InvoiceService manages Invoice endpoint

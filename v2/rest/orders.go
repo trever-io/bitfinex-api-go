@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"path"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/common"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/notification"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/order"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/tradeexecutionupdate"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/common"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/notification"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/order"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/tradeexecutionupdate"
 )
 
 // OrderService manages data flow for the Order API endpoint

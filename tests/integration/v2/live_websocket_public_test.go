@@ -8,15 +8,15 @@ import (
 	"testing"
 	"time"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/book"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/candle"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/common"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/ticker"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/trade"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/tradeexecution"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/tradeexecutionupdate"
-	"github.com/bitfinexcom/bitfinex-api-go/v2"
-	"github.com/bitfinexcom/bitfinex-api-go/v2/websocket"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/book"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/candle"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/common"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/ticker"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/trade"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/tradeexecution"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/tradeexecutionupdate"
+	"github.com/trever-io/bitfinex-api-go/v2"
+	"github.com/trever-io/bitfinex-api-go/v2/websocket"
 )
 
 // wait2 will wait for at least "count" messages on channel "ch" within time "t", or return an error

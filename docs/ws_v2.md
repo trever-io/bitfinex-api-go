@@ -1,7 +1,7 @@
 # websocket
---
-    import "github.com/bitfinexcom/bitfinex-api-go/v2/websocket"
 
+--
+import "github.com/trever-io/bitfinex-api-go/v2/websocket"
 
 ## Usage
 
@@ -14,6 +14,7 @@ const (
 	ChanStatus  = "status"
 )
 ```
+
 Available channels
 
 ```go
@@ -23,6 +24,7 @@ const (
 	EventPing        = "ping"
 )
 ```
+
 Events
 
 ```go
@@ -38,16 +40,19 @@ const (
 	ErrorCodeNotSubscribed        int = 10401
 )
 ```
+
 error codes pulled from v2 docs & API usage
 
 ```go
 const DMSCancelOnDisconnect int = 4
 ```
+
 DMSCancelOnDisconnect cancels session orders on disconnect.
 
 ```go
 const KEEP_ALIVE_TIMEOUT = 10
 ```
+
 seconds to wait in between re-sending the keep alive ping
 
 ```go
@@ -57,11 +62,13 @@ const MaxChannels = 25
 ```go
 const WS_READ_CAPACITY = 10
 ```
+
 size of channel that the websocket reader routine pushes websocket updates into
 
 ```go
 const WS_WRITE_CAPACITY = 5000
 ```
+
 size of channel that the websocket writer routine pulls from
 
 ```go
@@ -70,9 +77,10 @@ var (
 	ErrWSAlreadyConnected = fmt.Errorf("websocket connection already established")
 )
 ```
+
 ws-specific errors
 
-#### func  ConvertBytesToJsonNumberArray
+#### func ConvertBytesToJsonNumberArray
 
 ```go
 func ConvertBytesToJsonNumberArray(b []byte) ([]interface{}, error)
@@ -103,11 +111,12 @@ type AsynchronousFactory interface {
 AsynchronousFactory provides an interface to re-create asynchronous transports
 during reconnect events.
 
-#### func  NewWebsocketAsynchronousFactory
+#### func NewWebsocketAsynchronousFactory
 
 ```go
 func NewWebsocketAsynchronousFactory(parameters *Parameters) AsynchronousFactory
 ```
+
 NewWebsocketAsynchronousFactory creates a new websocket factory with a given
 URL.
 
@@ -126,7 +135,6 @@ type AuthEvent struct {
 }
 ```
 
-
 #### type AuthState
 
 ```go
@@ -144,6 +152,7 @@ const (
 	RejectedAuthentication   AuthState = 3
 )
 ```
+
 Authentication states
 
 #### type BookFactory
@@ -153,14 +162,13 @@ type BookFactory struct {
 }
 ```
 
-
-#### func (*BookFactory) Build
+#### func (\*BookFactory) Build
 
 ```go
 func (f *BookFactory) Build(sub *subscription, objType string, raw []interface{}, b []byte) (interface{}, error)
 ```
 
-#### func (*BookFactory) BuildSnapshot
+#### func (\*BookFactory) BuildSnapshot
 
 ```go
 func (f *BookFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, b []byte) (interface{}, error)
@@ -171,6 +179,7 @@ func (f *BookFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, b []
 ```go
 func (s BookFactory) Close()
 ```
+
 Close is terminal. Do not call heartbeat after close.
 
 #### func (BookFactory) ListenDisconnect
@@ -178,6 +187,7 @@ Close is terminal. Do not call heartbeat after close.
 ```go
 func (s BookFactory) ListenDisconnect() <-chan HeartbeatDisconnect
 ```
+
 ListenDisconnect returns an error channel which receives a message when a
 heartbeat has expired a channel.
 
@@ -186,6 +196,7 @@ heartbeat has expired a channel.
 ```go
 func (s BookFactory) ResetAll()
 ```
+
 Removes all tracked subscriptions
 
 #### func (BookFactory) ResetSocketSubscriptions
@@ -193,6 +204,7 @@ Removes all tracked subscriptions
 ```go
 func (s BookFactory) ResetSocketSubscriptions(socketId SocketId) []*subscription
 ```
+
 Reset clears all subscriptions assigned to the given socket ID, and returns a
 slice of the existing subscriptions prior to reset
 
@@ -203,14 +215,13 @@ type CandlesFactory struct {
 }
 ```
 
-
-#### func (*CandlesFactory) Build
+#### func (\*CandlesFactory) Build
 
 ```go
 func (f *CandlesFactory) Build(sub *subscription, objType string, raw []interface{}, raw_bytes []byte) (interface{}, error)
 ```
 
-#### func (*CandlesFactory) BuildSnapshot
+#### func (\*CandlesFactory) BuildSnapshot
 
 ```go
 func (f *CandlesFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, raw_bytes []byte) (interface{}, error)
@@ -221,6 +232,7 @@ func (f *CandlesFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, r
 ```go
 func (s CandlesFactory) Close()
 ```
+
 Close is terminal. Do not call heartbeat after close.
 
 #### func (CandlesFactory) ListenDisconnect
@@ -228,6 +240,7 @@ Close is terminal. Do not call heartbeat after close.
 ```go
 func (s CandlesFactory) ListenDisconnect() <-chan HeartbeatDisconnect
 ```
+
 ListenDisconnect returns an error channel which receives a message when a
 heartbeat has expired a channel.
 
@@ -236,6 +249,7 @@ heartbeat has expired a channel.
 ```go
 func (s CandlesFactory) ResetAll()
 ```
+
 Removes all tracked subscriptions
 
 #### func (CandlesFactory) ResetSocketSubscriptions
@@ -243,6 +257,7 @@ Removes all tracked subscriptions
 ```go
 func (s CandlesFactory) ResetSocketSubscriptions(socketId SocketId) []*subscription
 ```
+
 Reset clears all subscriptions assigned to the given socket ID, and returns a
 slice of the existing subscriptions prior to reset
 
@@ -260,7 +275,6 @@ type Capabilities struct {
 }
 ```
 
-
 #### type Capability
 
 ```go
@@ -269,7 +283,6 @@ type Capability struct {
 	Write int `json:"write"`
 }
 ```
-
 
 #### type Client
 
@@ -282,267 +295,302 @@ type Client struct {
 Client provides a unified interface for users to interact with the Bitfinex V2
 Websocket API. nolint:megacheck,structcheck
 
-#### func  New
+#### func New
 
 ```go
 func New() *Client
 ```
+
 New creates a default client.
 
-#### func  NewWithAsyncFactory
+#### func NewWithAsyncFactory
 
 ```go
 func NewWithAsyncFactory(async AsynchronousFactory) *Client
 ```
+
 NewWithAsyncFactory creates a new default client with a given asynchronous
 transport factory interface.
 
-#### func  NewWithAsyncFactoryNonce
+#### func NewWithAsyncFactoryNonce
 
 ```go
 func NewWithAsyncFactoryNonce(async AsynchronousFactory, nonce utils.NonceGenerator) *Client
 ```
+
 NewWithAsyncFactoryNonce creates a new default client with a given asynchronous
 transport factory and nonce generator.
 
-#### func  NewWithParams
+#### func NewWithParams
 
 ```go
 func NewWithParams(params *Parameters) *Client
 ```
+
 NewWithParams creates a new default client with a given set of parameters.
 
-#### func  NewWithParamsAsyncFactory
+#### func NewWithParamsAsyncFactory
 
 ```go
 func NewWithParamsAsyncFactory(params *Parameters, async AsynchronousFactory) *Client
 ```
+
 NewWithParamsAsyncFactory creates a new default client with a given set of
 parameters and asynchronous transport factory interface.
 
-#### func  NewWithParamsAsyncFactoryNonce
+#### func NewWithParamsAsyncFactoryNonce
 
 ```go
 func NewWithParamsAsyncFactoryNonce(params *Parameters, async AsynchronousFactory, nonce utils.NonceGenerator) *Client
 ```
+
 NewWithParamsAsyncFactoryNonce creates a new client with a given set of
 parameters, asynchronous transport factory, and nonce generator interfaces.
 
-#### func  NewWithParamsNonce
+#### func NewWithParamsNonce
 
 ```go
 func NewWithParamsNonce(params *Parameters, nonce utils.NonceGenerator) *Client
 ```
+
 NewWithParamsNonce creates a new default client with a given set of parameters
 and nonce generator.
 
-#### func (*Client) AvailableCapacity
+#### func (\*Client) AvailableCapacity
 
 ```go
 func (c *Client) AvailableCapacity() int
 ```
+
 Get the available capacity of the current websocket connections
 
-#### func (*Client) CancelOnDisconnect
+#### func (\*Client) CancelOnDisconnect
 
 ```go
 func (c *Client) CancelOnDisconnect(cxl bool) *Client
 ```
+
 CancelOnDisconnect ensures all orders will be canceled if this API session is
 disconnected.
 
-#### func (*Client) Close
+#### func (\*Client) Close
 
 ```go
 func (c *Client) Close()
 ```
+
 Close the websocket client which will cause for all active sockets to be exited
 and the Done() function to be called
 
-#### func (*Client) CloseFundingCredit
+#### func (\*Client) CloseFundingCredit
 
 ```go
 func (c *Client) CloseFundingCredit(ctx context.Context, fundingOffer *fundingcredit.CancelRequest) error
 ```
+
 CloseFundingCredit - cancels funding credit by ID. Emits an error if not
 authenticated.
 
-#### func (*Client) CloseFundingLoan
+#### func (\*Client) CloseFundingLoan
 
 ```go
 func (c *Client) CloseFundingLoan(ctx context.Context, flcr *fundingloan.CancelRequest) error
 ```
+
 CloseFundingLoan - cancels funding loan by ID. Emits an error if not
 authenticated.
 
-#### func (*Client) Connect
+#### func (\*Client) Connect
 
 ```go
 func (c *Client) Connect() error
 ```
+
 Connect to the Bitfinex API, this should only be called once.
 
-#### func (*Client) ConnectionCount
+#### func (\*Client) ConnectionCount
 
 ```go
 func (c *Client) ConnectionCount() int
 ```
+
 Gen the count of currently active websocket connections
 
-#### func (*Client) Credentials
+#### func (\*Client) Credentials
 
 ```go
 func (c *Client) Credentials(key string, secret string) *Client
 ```
+
 Credentials assigns authentication credentials to a connection request.
 
-#### func (*Client) EnableFlag
+#### func (\*Client) EnableFlag
 
 ```go
 func (c *Client) EnableFlag(ctx context.Context, flag int) (string, error)
 ```
+
 Submit a request to enable the given flag
 
-#### func (*Client) GetAuthenticatedSocket
+#### func (\*Client) GetAuthenticatedSocket
 
 ```go
 func (c *Client) GetAuthenticatedSocket() (*Socket, error)
 ```
+
 Get the authenticated socket. Due to rate limitations there can only be one
 authenticated socket active at a time
 
-#### func (*Client) GetOrderbook
+#### func (\*Client) GetOrderbook
 
 ```go
 func (c *Client) GetOrderbook(symbol string) (*Orderbook, error)
 ```
+
 Retrieve the Orderbook for the given symbol which is managed locally. This
 requires ManageOrderbook=True and an active chanel subscribed to the given
 symbols orderbook
 
-#### func (*Client) IsConnected
+#### func (\*Client) IsConnected
 
 ```go
 func (c *Client) IsConnected() bool
 ```
+
 Returns true if the underlying asynchronous transport is connected to an
 endpoint.
 
-#### func (*Client) Listen
+#### func (\*Client) Listen
 
 ```go
 func (c *Client) Listen() <-chan interface{}
 ```
+
 Listen for all incoming api websocket messages When a websocket connection is
 terminated, the publisher channel will close.
 
-#### func (*Client) LookupSubscription
+#### func (\*Client) LookupSubscription
 
 ```go
 func (c *Client) LookupSubscription(subID string) (*SubscriptionRequest, error)
 ```
+
 Get a subscription request using a subscription ID
 
-#### func (*Client) Send
+#### func (\*Client) Send
 
 ```go
 func (c *Client) Send(ctx context.Context, msg interface{}) error
 ```
+
 Send publishes a generic message to the Bitfinex API.
 
-#### func (*Client) StartNewConnection
+#### func (\*Client) StartNewConnection
 
 ```go
 func (c *Client) StartNewConnection() error
 ```
+
 Start a new websocket connection. This function is only exposed in case you want
 to implicitly add new connections otherwise connection management is already
 handled for you.
 
-#### func (*Client) SubmitCancel
+#### func (\*Client) SubmitCancel
 
 ```go
 func (c *Client) SubmitCancel(ctx context.Context, ocr *order.CancelRequest) error
 ```
+
 Submit a cancel request for an existing order
 
-#### func (*Client) SubmitFundingCancel
+#### func (\*Client) SubmitFundingCancel
 
 ```go
 func (c *Client) SubmitFundingCancel(ctx context.Context, fundingOffer *fundingoffer.CancelRequest) error
 ```
+
 Submit a request to cancel and existing funding offer
 
-#### func (*Client) SubmitFundingOffer
+#### func (\*Client) SubmitFundingOffer
 
 ```go
 func (c *Client) SubmitFundingOffer(ctx context.Context, fundingOffer *fundingoffer.SubmitRequest) error
 ```
+
 Submit a new funding offer request
 
-#### func (*Client) SubmitOrder
+#### func (\*Client) SubmitOrder
 
 ```go
 func (c *Client) SubmitOrder(ctx context.Context, onr *order.NewRequest) error
 ```
+
 Submit a request to create a new order
 
-#### func (*Client) SubmitUpdateOrder
+#### func (\*Client) SubmitUpdateOrder
 
 ```go
 func (c *Client) SubmitUpdateOrder(ctx context.Context, our *order.UpdateRequest) error
 ```
+
 Submit and update request to change an existing orders values
 
-#### func (*Client) Subscribe
+#### func (\*Client) Subscribe
 
 ```go
 func (c *Client) Subscribe(ctx context.Context, req *SubscriptionRequest) (string, error)
 ```
+
 Submit a request to subscribe to the given SubscriptionRequuest
 
-#### func (*Client) SubscribeBook
+#### func (\*Client) SubscribeBook
 
 ```go
 func (c *Client) SubscribeBook(ctx context.Context, symbol string, precision common.BookPrecision, frequency common.BookFrequency, priceLevel int) (string, error)
 ```
+
 Submit a subscription request for market data for the given symbol, at the given
 frequency, with the given precision, returning no more than priceLevels price
 entries. Default values are Precision0, Frequency0, and priceLevels=25.
 
-#### func (*Client) SubscribeCandles
+#### func (\*Client) SubscribeCandles
 
 ```go
 func (c *Client) SubscribeCandles(ctx context.Context, symbol string, resolution common.CandleResolution) (string, error)
 ```
+
 Submit a subscription request to receive candle updates
 
-#### func (*Client) SubscribeStatus
+#### func (\*Client) SubscribeStatus
 
 ```go
 func (c *Client) SubscribeStatus(ctx context.Context, symbol string, sType common.StatusType) (string, error)
 ```
+
 Submit a subscription request for status updates
 
-#### func (*Client) SubscribeTicker
+#### func (\*Client) SubscribeTicker
 
 ```go
 func (c *Client) SubscribeTicker(ctx context.Context, symbol string) (string, error)
 ```
+
 Submit a request to receive ticker updates
 
-#### func (*Client) SubscribeTrades
+#### func (\*Client) SubscribeTrades
 
 ```go
 func (c *Client) SubscribeTrades(ctx context.Context, symbol string) (string, error)
 ```
+
 Submit a request to receive trade updates
 
-#### func (*Client) Unsubscribe
+#### func (\*Client) Unsubscribe
 
 ```go
 func (c *Client) Unsubscribe(ctx context.Context, id string) error
 ```
+
 Unsubscribe from the existing subscription with the given id
 
 #### type ConfEvent
@@ -552,7 +600,6 @@ type ConfEvent struct {
 	Flags int `json:"flags"`
 }
 ```
-
 
 #### type ErrorEvent
 
@@ -574,7 +621,6 @@ type ErrorEvent struct {
 }
 ```
 
-
 #### type FlagRequest
 
 ```go
@@ -584,14 +630,12 @@ type FlagRequest struct {
 }
 ```
 
-
 #### type Heartbeat
 
 ```go
 type Heartbeat struct {
 }
 ```
-
 
 #### type HeartbeatDisconnect
 
@@ -601,7 +645,6 @@ type HeartbeatDisconnect struct {
 	Error        error
 }
 ```
-
 
 #### type InfoEvent
 
@@ -615,7 +658,6 @@ type InfoEvent struct {
 }
 ```
 
-
 #### type Orderbook
 
 ```go
@@ -623,38 +665,37 @@ type Orderbook struct {
 }
 ```
 
-
-#### func (*Orderbook) Asks
+#### func (\*Orderbook) Asks
 
 ```go
 func (ob *Orderbook) Asks() []book.Book
 ```
 
-#### func (*Orderbook) Bids
+#### func (\*Orderbook) Bids
 
 ```go
 func (ob *Orderbook) Bids() []book.Book
 ```
 
-#### func (*Orderbook) Checksum
+#### func (\*Orderbook) Checksum
 
 ```go
 func (ob *Orderbook) Checksum() uint32
 ```
 
-#### func (*Orderbook) SetWithSnapshot
+#### func (\*Orderbook) SetWithSnapshot
 
 ```go
 func (ob *Orderbook) SetWithSnapshot(bs *book.Snapshot)
 ```
 
-#### func (*Orderbook) Symbol
+#### func (\*Orderbook) Symbol
 
 ```go
 func (ob *Orderbook) Symbol() string
 ```
 
-#### func (*Orderbook) UpdateWith
+#### func (\*Orderbook) UpdateWith
 
 ```go
 func (ob *Orderbook) UpdateWith(b *book.Book)
@@ -684,7 +725,7 @@ type Parameters struct {
 
 Parameters defines adapter behavior.
 
-#### func  NewDefaultParameters
+#### func NewDefaultParameters
 
 ```go
 func NewDefaultParameters() *Parameters
@@ -698,7 +739,6 @@ type PlatformInfo struct {
 }
 ```
 
-
 #### type RawEvent
 
 ```go
@@ -706,7 +746,6 @@ type RawEvent struct {
 	Data interface{}
 }
 ```
-
 
 #### type Socket
 
@@ -720,13 +759,11 @@ type Socket struct {
 }
 ```
 
-
 #### type SocketId
 
 ```go
 type SocketId int
 ```
-
 
 #### type StatsFactory
 
@@ -735,14 +772,13 @@ type StatsFactory struct {
 }
 ```
 
-
-#### func (*StatsFactory) Build
+#### func (\*StatsFactory) Build
 
 ```go
 func (f *StatsFactory) Build(sub *subscription, objType string, raw []interface{}, raw_bytes []byte) (interface{}, error)
 ```
 
-#### func (*StatsFactory) BuildSnapshot
+#### func (\*StatsFactory) BuildSnapshot
 
 ```go
 func (f *StatsFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, raw_bytes []byte) (interface{}, error)
@@ -753,6 +789,7 @@ func (f *StatsFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, raw
 ```go
 func (s StatsFactory) Close()
 ```
+
 Close is terminal. Do not call heartbeat after close.
 
 #### func (StatsFactory) ListenDisconnect
@@ -760,6 +797,7 @@ Close is terminal. Do not call heartbeat after close.
 ```go
 func (s StatsFactory) ListenDisconnect() <-chan HeartbeatDisconnect
 ```
+
 ListenDisconnect returns an error channel which receives a message when a
 heartbeat has expired a channel.
 
@@ -768,6 +806,7 @@ heartbeat has expired a channel.
 ```go
 func (s StatsFactory) ResetAll()
 ```
+
 Removes all tracked subscriptions
 
 #### func (StatsFactory) ResetSocketSubscriptions
@@ -775,6 +814,7 @@ Removes all tracked subscriptions
 ```go
 func (s StatsFactory) ResetSocketSubscriptions(socketId SocketId) []*subscription
 ```
+
 Reset clears all subscriptions assigned to the given socket ID, and returns a
 slice of the existing subscriptions prior to reset
 
@@ -793,7 +833,6 @@ type SubscribeEvent struct {
 	Pair      string `json:"pair"`
 }
 ```
-
 
 #### type SubscriptionRequest
 
@@ -821,8 +860,7 @@ type SubscriptionRequest struct {
 }
 ```
 
-
-#### func (*SubscriptionRequest) String
+#### func (\*SubscriptionRequest) String
 
 ```go
 func (s *SubscriptionRequest) String() string
@@ -875,14 +913,13 @@ type TickerFactory struct {
 }
 ```
 
-
-#### func (*TickerFactory) Build
+#### func (\*TickerFactory) Build
 
 ```go
 func (f *TickerFactory) Build(sub *subscription, objType string, raw []interface{}, raw_bytes []byte) (interface{}, error)
 ```
 
-#### func (*TickerFactory) BuildSnapshot
+#### func (\*TickerFactory) BuildSnapshot
 
 ```go
 func (f *TickerFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, raw_bytes []byte) (interface{}, error)
@@ -893,6 +930,7 @@ func (f *TickerFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, ra
 ```go
 func (s TickerFactory) Close()
 ```
+
 Close is terminal. Do not call heartbeat after close.
 
 #### func (TickerFactory) ListenDisconnect
@@ -900,6 +938,7 @@ Close is terminal. Do not call heartbeat after close.
 ```go
 func (s TickerFactory) ListenDisconnect() <-chan HeartbeatDisconnect
 ```
+
 ListenDisconnect returns an error channel which receives a message when a
 heartbeat has expired a channel.
 
@@ -908,6 +947,7 @@ heartbeat has expired a channel.
 ```go
 func (s TickerFactory) ResetAll()
 ```
+
 Removes all tracked subscriptions
 
 #### func (TickerFactory) ResetSocketSubscriptions
@@ -915,6 +955,7 @@ Removes all tracked subscriptions
 ```go
 func (s TickerFactory) ResetSocketSubscriptions(socketId SocketId) []*subscription
 ```
+
 Reset clears all subscriptions assigned to the given socket ID, and returns a
 slice of the existing subscriptions prior to reset
 
@@ -925,14 +966,13 @@ type TradeFactory struct {
 }
 ```
 
-
-#### func (*TradeFactory) Build
+#### func (\*TradeFactory) Build
 
 ```go
 func (f *TradeFactory) Build(sub *subscription, objType string, raw []interface{}, raw_bytes []byte) (interface{}, error)
 ```
 
-#### func (*TradeFactory) BuildSnapshot
+#### func (\*TradeFactory) BuildSnapshot
 
 ```go
 func (f *TradeFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, raw_bytes []byte) (interface{}, error)
@@ -943,6 +983,7 @@ func (f *TradeFactory) BuildSnapshot(sub *subscription, raw [][]interface{}, raw
 ```go
 func (s TradeFactory) Close()
 ```
+
 Close is terminal. Do not call heartbeat after close.
 
 #### func (TradeFactory) ListenDisconnect
@@ -950,6 +991,7 @@ Close is terminal. Do not call heartbeat after close.
 ```go
 func (s TradeFactory) ListenDisconnect() <-chan HeartbeatDisconnect
 ```
+
 ListenDisconnect returns an error channel which receives a message when a
 heartbeat has expired a channel.
 
@@ -958,6 +1000,7 @@ heartbeat has expired a channel.
 ```go
 func (s TradeFactory) ResetAll()
 ```
+
 Removes all tracked subscriptions
 
 #### func (TradeFactory) ResetSocketSubscriptions
@@ -965,6 +1008,7 @@ Removes all tracked subscriptions
 ```go
 func (s TradeFactory) ResetSocketSubscriptions(socketId SocketId) []*subscription
 ```
+
 Reset clears all subscriptions assigned to the given socket ID, and returns a
 slice of the existing subscriptions prior to reset
 
@@ -977,7 +1021,6 @@ type UnsubscribeEvent struct {
 }
 ```
 
-
 #### type UnsubscribeRequest
 
 ```go
@@ -986,7 +1029,6 @@ type UnsubscribeRequest struct {
 	ChanID int64  `json:"chanId"`
 }
 ```
-
 
 #### type WebsocketAsynchronousFactory
 
@@ -997,9 +1039,10 @@ type WebsocketAsynchronousFactory struct {
 
 WebsocketAsynchronousFactory creates a websocket-based asynchronous transport.
 
-#### func (*WebsocketAsynchronousFactory) Create
+#### func (\*WebsocketAsynchronousFactory) Create
 
 ```go
 func (w *WebsocketAsynchronousFactory) Create() Asynchronous
 ```
+
 Create returns a new websocket transport.

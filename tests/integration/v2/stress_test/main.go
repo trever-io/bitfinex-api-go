@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/common"
-	"github.com/bitfinexcom/bitfinex-api-go/v2/websocket"
 	"github.com/op/go-logging"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/common"
+	"github.com/trever-io/bitfinex-api-go/v2/websocket"
 )
 
 var symbols = []string{

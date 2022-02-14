@@ -5,17 +5,17 @@ import (
 	"log"
 	"time"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/balanceinfo"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/fundinginfo"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/margin"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/notification"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/order"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/position"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/ticker"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/tradeexecution"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/tradeexecutionupdate"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/wallet"
-	"github.com/bitfinexcom/bitfinex-api-go/v2/websocket"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/balanceinfo"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/fundinginfo"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/margin"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/notification"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/order"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/position"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/ticker"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/tradeexecution"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/tradeexecutionupdate"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/wallet"
+	"github.com/trever-io/bitfinex-api-go/v2/websocket"
 )
 
 type listener struct {

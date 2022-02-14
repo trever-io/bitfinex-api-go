@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/convert"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/candle"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/common"
+	"github.com/trever-io/bitfinex-api-go/pkg/convert"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/candle"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/common"
 )
 
 // CandleService manages the Candles endpoint.
