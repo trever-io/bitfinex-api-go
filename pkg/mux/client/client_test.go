@@ -4,8 +4,8 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/event"
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/mux/client"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/event"
+	"github.com/trever-io/bitfinex-api-go/pkg/mux/client"
 	"github.com/stretchr/testify/assert"
 )
 

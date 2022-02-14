@@ -3,7 +3,7 @@ package invoice
 import (
 	"fmt"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/convert"
+	"github.com/trever-io/bitfinex-api-go/pkg/convert"
 )
 
 // Invoice data structure

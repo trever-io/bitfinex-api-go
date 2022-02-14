@@ -87,13 +87,13 @@ if err != nil {
 }
 ```
 
-See the <b>[examples](https://github.com/bitfinexcom/bitfinex-api-go/tree/master/examples)</b> directory for more, like:
+See the <b>[examples](https://github.com/trever-io/bitfinex-api-go/tree/master/examples)</b> directory for more, like:
 
-- [Creating/updating an order](https://github.com/bitfinexcom/bitfinex-api-go/blob/master/examples/v2/ws-update-order/main.go)
-- [Subscribing to orderbook updates](https://github.com/bitfinexcom/bitfinex-api-go/blob/master/examples/v2/book-feed/main.go)
-- [Integrating a custom logger](https://github.com/bitfinexcom/bitfinex-api-go/blob/master/examples/v2/ws-custom-logger/main.go)
-- [Submitting funding offers](https://github.com/bitfinexcom/bitfinex-api-go/blob/master/examples/v2/rest-funding/main.go)
-- [Retrieving active positions](https://github.com/bitfinexcom/bitfinex-api-go/blob/master/examples/v2/rest-positions/main.go)
+- [Creating/updating an order](https://github.com/trever-io/bitfinex-api-go/blob/master/examples/v2/ws-update-order/main.go)
+- [Subscribing to orderbook updates](https://github.com/trever-io/bitfinex-api-go/blob/master/examples/v2/book-feed/main.go)
+- [Integrating a custom logger](https://github.com/trever-io/bitfinex-api-go/blob/master/examples/v2/ws-custom-logger/main.go)
+- [Submitting funding offers](https://github.com/trever-io/bitfinex-api-go/blob/master/examples/v2/rest-funding/main.go)
+- [Retrieving active positions](https://github.com/trever-io/bitfinex-api-go/blob/master/examples/v2/rest-positions/main.go)
 
 ## FAQ
 
@@ -141,7 +141,7 @@ Order books with precision `R0` are considered 'raw' and contain entries for eac
 
 ## Contributing
 
-1. Fork it (https://github.com/bitfinexcom/bitfinex-api-go/fork)
+1. Fork it (https://github.com/trever-io/bitfinex-api-go/fork)
 2. Create your feature branch (`git checkout -b my-new-feature)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

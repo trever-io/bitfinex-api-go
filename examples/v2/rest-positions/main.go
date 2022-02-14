@@ -5,8 +5,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/position"
-	"github.com/bitfinexcom/bitfinex-api-go/v2/rest"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/position"
+	"github.com/trever-io/bitfinex-api-go/v2/rest"
 	"github.com/davecgh/go-spew/spew"
 )
 

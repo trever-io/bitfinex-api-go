@@ -8,8 +8,8 @@ import (
 	"os"
 	"os/signal"
 
-	"github.com/bitfinexcom/bitfinex-api-go/pkg/models/common"
-	"github.com/bitfinexcom/bitfinex-api-go/v2/websocket"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/common"
+	"github.com/trever-io/bitfinex-api-go/v2/websocket"
 )
 
 func main() {
