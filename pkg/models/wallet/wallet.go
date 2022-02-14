@@ -57,7 +57,7 @@ func UpdateFromRaw(raw []interface{}) (Update, error) {
 
 func SnapshotFromRaw(raw []interface{}) (s *Snapshot, err error) {
 	if len(raw) == 0 {
-		return s, fmt.Errorf("data slice too short for wallet: %#v", raw)
+		return &Snapshot{Snapshot: make([]*Wallet, 0)}, nil
 	}
 
 	ws := make([]*Wallet, 0)
