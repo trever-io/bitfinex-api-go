@@ -3,12 +3,9 @@ package rest
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"net/url"
 )
-
-var Debug bool = false
 
 type HttpTransport struct {
 	BaseURL    *url.URL
@@ -59,11 +56,6 @@ func (h HttpTransport) do(req *http.Request, v interface{}) error {
 	err = checkResponse(response)
 	if err != nil {
 		return err
-	}
-
-	if Debug {
-		b, _ := json.MarshalIndent(response, "", "  ")
-		fmt.Println(string(b))
 	}
 
 	if v != nil {
