@@ -162,8 +162,6 @@ func (w *WebSocketService) Subscribe() error {
 			w.handleDataMessage(p)
 		}
 	}
-	// nolint
-	return nil
 }
 
 func (w *WebSocketService) handleEventMessage(msg []byte) {

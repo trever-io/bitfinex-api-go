@@ -31,7 +31,7 @@ func main() {
 		}
 	}()
 	done := make(chan bool, 1)
-	interrupt := make(chan os.Signal)
+	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt, os.Kill)
 	go func() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))
