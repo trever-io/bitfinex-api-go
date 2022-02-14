@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/trever-io/bitfinex-api-go/pkg/models/common"
 	"github.com/trever-io/bitfinex-api-go/v2/rest"
-	"github.com/davecgh/go-spew/spew"
 )
 
 func main() {

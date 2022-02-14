@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/trever-io/bitfinex-api-go/pkg/models/fundingoffer"
 	"github.com/trever-io/bitfinex-api-go/pkg/models/notification"
 	"github.com/trever-io/bitfinex-api-go/pkg/models/order"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 func TestNotificationMapping(t *testing.T) {

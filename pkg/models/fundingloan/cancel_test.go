@@ -3,9 +3,9 @@ package fundingloan_test
 import (
 	"testing"
 
-	"github.com/trever-io/bitfinex-api-go/pkg/models/fundingloan"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/fundingloan"
 )
 
 func TestCancelRequest(t *testing.T) {

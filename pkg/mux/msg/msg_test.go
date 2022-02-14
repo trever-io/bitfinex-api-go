@@ -3,6 +3,8 @@ package msg_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/trever-io/bitfinex-api-go/pkg/models/balanceinfo"
 	"github.com/trever-io/bitfinex-api-go/pkg/models/book"
 	"github.com/trever-io/bitfinex-api-go/pkg/models/candle"
@@ -19,8 +21,6 @@ import (
 	"github.com/trever-io/bitfinex-api-go/pkg/models/trades"
 	"github.com/trever-io/bitfinex-api-go/pkg/models/wallet"
 	"github.com/trever-io/bitfinex-api-go/pkg/mux/msg"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 )
 
 func TestIsEvent(t *testing.T) {

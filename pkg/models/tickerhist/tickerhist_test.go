@@ -3,8 +3,8 @@ package tickerhist_test
 import (
 	"testing"
 
-	"github.com/trever-io/bitfinex-api-go/pkg/models/tickerhist"
 	"github.com/stretchr/testify/assert"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/tickerhist"
 )
 
 func TestTickerHistFromRaw(t *testing.T) {

@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/trever-io/bitfinex-api-go/pkg/models/order"
 	"github.com/stretchr/testify/assert"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/order"
 )
 
 func TestFromRaw(t *testing.T) {

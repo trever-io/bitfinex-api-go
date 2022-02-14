@@ -3,8 +3,8 @@ package status_test
 import (
 	"testing"
 
-	"github.com/trever-io/bitfinex-api-go/pkg/models/status"
 	"github.com/stretchr/testify/assert"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/status"
 )
 
 func TestFromWSRaw(t *testing.T) {

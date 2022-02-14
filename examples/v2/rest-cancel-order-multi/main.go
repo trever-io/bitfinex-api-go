@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/trever-io/bitfinex-api-go/v2/rest"
 	"github.com/davecgh/go-spew/spew"
+	"github.com/trever-io/bitfinex-api-go/v2/rest"
 )
 
 // Set BFX_API_KEY and BFX_API_SECRET:

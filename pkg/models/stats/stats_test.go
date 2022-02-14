@@ -3,9 +3,9 @@ package stats_test
 import (
 	"testing"
 
-	"github.com/trever-io/bitfinex-api-go/pkg/models/stats"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/stats"
 )
 
 func TestNewStatsFromRaw(t *testing.T) {

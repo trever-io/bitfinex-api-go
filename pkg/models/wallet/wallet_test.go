@@ -3,8 +3,8 @@ package wallet_test
 import (
 	"testing"
 
-	"github.com/trever-io/bitfinex-api-go/pkg/models/wallet"
 	"github.com/stretchr/testify/assert"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/wallet"
 )
 
 func TestUpdateFromRaw(t *testing.T) {

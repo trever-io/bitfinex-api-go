@@ -3,9 +3,9 @@ package ticker_test
 import (
 	"testing"
 
-	"github.com/trever-io/bitfinex-api-go/pkg/models/ticker"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/ticker"
 )
 
 func TestNewTickerFromRestRaw(t *testing.T) {

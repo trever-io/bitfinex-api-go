@@ -3,8 +3,8 @@ package trades_test
 import (
 	"testing"
 
-	"github.com/trever-io/bitfinex-api-go/pkg/models/trades"
 	"github.com/stretchr/testify/assert"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/trades"
 )
 
 func TestAuthenticatedTradeExecutionUpdateFromRaw(t *testing.T) {

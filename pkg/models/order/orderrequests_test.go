@@ -3,9 +3,9 @@ package order_test
 import (
 	"testing"
 
-	"github.com/trever-io/bitfinex-api-go/pkg/models/order"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/trever-io/bitfinex-api-go/pkg/models/order"
 )
 
 func TestOrderNewRequest(t *testing.T) {

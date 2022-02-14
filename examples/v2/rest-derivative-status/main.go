@@ -6,7 +6,6 @@ import (
 	"log"
 )
 
-
 func main() {
 	c := rest.NewClient()
 	pLStats, err := c.Status.DerivativeStatus("tBTCF0:USTF0")
@@ -15,4 +14,3 @@ func main() {
 	}
 	fmt.Println(pLStats)
 }
-

@@ -56,12 +56,12 @@ type UnsubscribeRequest struct {
 }
 
 type subscription struct {
-	ChanID     int64
-	SocketId   SocketId
-	pending    bool
-	Public     bool
+	ChanID   int64
+	SocketId SocketId
+	pending  bool
+	Public   bool
 
-	Request    *SubscriptionRequest
+	Request *SubscriptionRequest
 
 	hbDeadline time.Time
 }
@@ -84,11 +84,11 @@ func isPublic(request *SubscriptionRequest) bool {
 
 func newSubscription(socketId SocketId, request *SubscriptionRequest) *subscription {
 	return &subscription{
-		ChanID:  -1,
+		ChanID:   -1,
 		SocketId: socketId,
-		Request: request,
-		pending: true,
-		Public:  isPublic(request),
+		Request:  request,
+		pending:  true,
+		Public:   isPublic(request),
 	}
 }
 
@@ -102,15 +102,15 @@ func (s subscription) Pending() bool {
 
 func newSubscriptions(heartbeatTimeout time.Duration, log *logging.Logger) *subscriptions {
 	subs := &subscriptions{
-		subsBySubID:  make(map[string]*subscription),
-		subsByChanID: make(map[int64]*subscription),
+		subsBySubID:    make(map[string]*subscription),
+		subsByChanID:   make(map[int64]*subscription),
 		subsBySocketId: make(map[SocketId]SubscriptionSet),
-		hbTimeout:    heartbeatTimeout,
-		hbShutdown:   make(chan struct{}),
-		hbDisconnect: make(chan HeartbeatDisconnect),
-		hbSleep:      heartbeatTimeout / time.Duration(4),
-		log:          log,
-		lock:         &sync.RWMutex{},
+		hbTimeout:      heartbeatTimeout,
+		hbShutdown:     make(chan struct{}),
+		hbDisconnect:   make(chan HeartbeatDisconnect),
+		hbSleep:        heartbeatTimeout / time.Duration(4),
+		log:            log,
+		lock:           &sync.RWMutex{},
 	}
 	go subs.control()
 	return subs
@@ -123,12 +123,12 @@ type heartbeat struct {
 }
 
 type subscriptions struct {
-	lock         *sync.RWMutex
-	log          *logging.Logger
+	lock *sync.RWMutex
+	log  *logging.Logger
 
 	subsBySocketId map[SocketId]SubscriptionSet // subscripts map indexed by socket id
-	subsBySubID  map[string]*subscription // subscription map indexed by subscription ID
-	subsByChanID map[int64]*subscription  // subscription map indexed by channel ID
+	subsBySubID    map[string]*subscription     // subscription map indexed by subscription ID
+	subsByChanID   map[int64]*subscription      // subscription map indexed by channel ID
 
 	hbActive     bool
 	hbDisconnect chan HeartbeatDisconnect // disconnect parent due to heartbeat timeout
@@ -198,7 +198,7 @@ func (s *subscriptions) sweep(exp time.Time) {
 			s.hbActive = false
 			hbErr := HeartbeatDisconnect{
 				Subscription: sub,
-				Error: fmt.Errorf("heartbeat disconnect on channel %d expired at %s (%s timeout)", sub.ChanID, sub.hbDeadline, s.hbTimeout),
+				Error:        fmt.Errorf("heartbeat disconnect on channel %d expired at %s (%s timeout)", sub.ChanID, sub.hbDeadline, s.hbTimeout),
 			}
 			disconnects = append(disconnects, hbErr)
 		}
@@ -226,7 +226,6 @@ func (s *subscriptions) Close() {
 	s.ResetAll()
 	close(s.hbShutdown)
 }
-
 
 // Reset clears all subscriptions assigned to the given socket ID, and returns
 // a slice of the existing subscriptions prior to reset
