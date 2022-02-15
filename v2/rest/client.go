@@ -52,6 +52,7 @@ type Client struct {
 	Pulse          PulseService
 	Invoice        InvoiceService
 	Market         MarketService
+	Movement       MovementService
 
 	Synchronous
 }
@@ -127,6 +128,7 @@ func NewClientWithSynchronousURLNonce(sync Synchronous, url string, nonce utils.
 	c.Pulse = PulseService{Synchronous: c, requestFactory: c}
 	c.Invoice = InvoiceService{Synchronous: c, requestFactory: c}
 	c.Market = MarketService{Synchronous: c, requestFactory: c}
+	c.Movement = MovementService{Synchronous: c, requestFactory: c}
 	return c
 }
 
@@ -243,6 +245,7 @@ func newResponse(r *http.Response) *Response {
 		body = []byte(`Error reading body:` + err.Error())
 	}
 
+	fmt.Printf("BODY: %v\n", string(body))
 	return &Response{r, body}
 }
 
