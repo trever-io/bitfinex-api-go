@@ -1,6 +1,8 @@
 package currency
 
-import "strings"
+import (
+	"strings"
+)
 
 type Conf struct {
 	Currency  string
@@ -10,6 +12,7 @@ type Conf struct {
 	Pools     []string
 	Explorers ExplorerConf
 	Unit      string
+	Methods   []string
 }
 
 type ExplorerConf struct {
@@ -26,6 +29,7 @@ const (
 	UnitMap     ConfigMapping = "pub:map:currency:unit"
 	ExplorerMap ConfigMapping = "pub:map:currency:explorer"
 	ExchangeMap ConfigMapping = "pub:list:pair:exchange"
+	MethodMap   ConfigMapping = "pub:map:tx:method"
 )
 
 type RawConf struct {
@@ -47,6 +51,29 @@ func parseLabelMap(config map[string]Conf, raw []interface{}) {
 			cfg.Label = data[1].(string)
 			cfg.Currency = cur
 			config[cur] = cfg
+		}
+	}
+}
+
+func parseMethodMap(config map[string]Conf, raw []interface{}) {
+	for _, rawMethod := range raw {
+		data := rawMethod.([]interface{})
+		curs := data[1].([]interface{})
+		for _, curInt := range curs {
+			cur := curInt.(string)
+			if val, ok := config[cur]; ok {
+				if val.Methods == nil {
+					val.Methods = make([]string, 0)
+				}
+
+				val.Methods = append(val.Methods, data[0].(string))
+				config[cur] = val
+			} else {
+				cfg := Conf{}
+				cfg.Methods = []string{data[0].(string)}
+				cfg.Currency = cur
+				config[cur] = cfg
+			}
 		}
 	}
 }
@@ -157,6 +184,9 @@ func FromRaw(raw []RawConf) ([]Conf, error) {
 		case ExchangeMap:
 			data := r.Data.([]interface{})
 			parseExchangeMap(configMap, data)
+		case MethodMap:
+			data := r.Data.([]interface{})
+			parseMethodMap(configMap, data)
 		}
 	}
 
