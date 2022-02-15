@@ -245,7 +245,6 @@ func newResponse(r *http.Response) *Response {
 		body = []byte(`Error reading body:` + err.Error())
 	}
 
-	fmt.Printf("BODY: %v\n", string(body))
 	return &Response{r, body}
 }
 
