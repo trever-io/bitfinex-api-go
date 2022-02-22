@@ -65,7 +65,7 @@ func createDepositAddress(c *rest.Client) {
 }
 
 func withdraw(c *rest.Client) {
-	notfication, err := c.Wallet.Withdraw("exchange", "ethereum", 0.1, "0x5B4Dbe55dE0B565db6C63405D942886140083cE8")
+	notfication, err := c.Wallet.Withdraw("exchange", "ethereum", 0.1, "0x5B4Dbe55dE0B565db6C63405D942886140083cE8", "paymentid")
 	if err != nil {
 		log.Fatalf("withdraw %s", err)
 	}

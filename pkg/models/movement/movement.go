@@ -26,7 +26,7 @@ type Snapshot struct {
 
 func FromRaw(raw []interface{}) (m *Movement, err error) {
 	if len(raw) < 22 {
-		err = fmt.Errorf("data slice too short for movement: $#v", raw)
+		err = fmt.Errorf("data slice too short for movement: %#v", raw)
 		return
 	}
 

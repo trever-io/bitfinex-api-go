@@ -13,12 +13,18 @@ type Conf struct {
 	Explorers ExplorerConf
 	Unit      string
 	Methods   []string
+	Fees      Fees
 }
 
 type ExplorerConf struct {
 	BaseUri        string
 	AddressUri     string
 	TransactionUri string
+}
+
+type Fees struct {
+	WithdrawFee float64
+	DepositFee  float64
 }
 
 type ConfigMapping string
@@ -30,6 +36,7 @@ const (
 	ExplorerMap ConfigMapping = "pub:map:currency:explorer"
 	ExchangeMap ConfigMapping = "pub:list:pair:exchange"
 	MethodMap   ConfigMapping = "pub:map:tx:method"
+	FeesMap     ConfigMapping = "pub:map:currency:tx:fee"
 )
 
 type RawConf struct {
@@ -74,6 +81,31 @@ func parseMethodMap(config map[string]Conf, raw []interface{}) {
 				cfg.Currency = cur
 				config[cur] = cfg
 			}
+		}
+	}
+}
+
+func parseFeesMap(config map[string]Conf, raw []interface{}) {
+	for _, rawFees := range raw {
+		data := rawFees.([]interface{})
+		cur := data[0].(string)
+		fees := data[1].([]interface{})
+		depositFee := fees[0].(float64)
+		withdrawFee := fees[1].(float64)
+		if val, ok := config[cur]; ok {
+			val.Fees = Fees{
+				WithdrawFee: withdrawFee,
+				DepositFee:  depositFee,
+			}
+			config[cur] = val
+		} else {
+			cfg := Conf{}
+			cfg.Fees = Fees{
+				WithdrawFee: withdrawFee,
+				DepositFee:  depositFee,
+			}
+			cfg.Currency = cur
+			config[cur] = cfg
 		}
 	}
 }
@@ -187,6 +219,9 @@ func FromRaw(raw []RawConf) ([]Conf, error) {
 		case MethodMap:
 			data := r.Data.([]interface{})
 			parseMethodMap(configMap, data)
+		case FeesMap:
+			data := r.Data.([]interface{})
+			parseFeesMap(configMap, data)
 		}
 	}
 
