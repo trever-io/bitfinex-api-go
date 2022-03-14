@@ -14,6 +14,7 @@ type Conf struct {
 	Unit      string
 	Methods   []string
 	Fees      Fees
+	Infos     Infos
 }
 
 type ExplorerConf struct {
@@ -27,6 +28,13 @@ type Fees struct {
 	DepositFee  float64
 }
 
+type Infos struct {
+	MinOrderSize  string
+	MaxOrderSize  string
+	InitialMargin float64
+	MinMargin     float64
+}
+
 type ConfigMapping string
 
 const (
@@ -37,6 +45,7 @@ const (
 	ExchangeMap ConfigMapping = "pub:list:pair:exchange"
 	MethodMap   ConfigMapping = "pub:map:tx:method"
 	FeesMap     ConfigMapping = "pub:map:currency:tx:fee"
+	InfoMap     ConfigMapping = "pub:info:pair"
 )
 
 type RawConf struct {
@@ -197,6 +206,45 @@ func parseExchangeMap(config map[string]Conf, raw []interface{}) {
 	}
 }
 
+func parseInfoMap(config map[string]Conf, raw []interface{}) {
+	for _, rawInfo := range raw {
+		data := rawInfo.([]interface{})
+		symbol := data[0].(string)
+		infos := data[1].([]interface{})
+
+		minOrderSize := infos[3].(string)
+		maxOrderSize := infos[4].(string)
+		var initialMargin float64
+		var minMargin float64
+
+		if infos[8] != nil {
+			initialMargin = infos[8].(float64)
+		}
+		if infos[9] != nil {
+			minMargin = infos[9].(float64)
+		}
+
+		if val, ok := config[symbol]; ok {
+			val.Infos = Infos{
+				MinOrderSize:  minOrderSize,
+				MaxOrderSize:  maxOrderSize,
+				InitialMargin: initialMargin,
+				MinMargin:     minMargin,
+			}
+		} else {
+			cfg := Conf{}
+			cfg.Infos = Infos{
+				MinOrderSize:  minOrderSize,
+				MaxOrderSize:  maxOrderSize,
+				InitialMargin: initialMargin,
+				MinMargin:     minMargin,
+			}
+			cfg.Symbol = symbol
+			config[symbol] = cfg
+		}
+	}
+}
+
 func FromRaw(raw []RawConf) ([]Conf, error) {
 	configMap := make(map[string]Conf)
 	for _, r := range raw {
@@ -222,6 +270,9 @@ func FromRaw(raw []RawConf) ([]Conf, error) {
 		case FeesMap:
 			data := r.Data.([]interface{})
 			parseFeesMap(configMap, data)
+		case InfoMap:
+			data := r.Data.([]interface{})
+			parseInfoMap(configMap, data)
 		}
 	}
 

@@ -15,7 +15,7 @@ type CurrenciesService struct {
 
 // Conf - retreive currency and symbol service configuration data
 // see https://docs.bitfinex.com/reference#rest-public-conf for more info
-func (cs *CurrenciesService) Conf(label, symbol, unit, explorer, pairs, methods, fees bool) ([]currency.Conf, error) {
+func (cs *CurrenciesService) Conf(label, symbol, unit, explorer, pairs, methods, fees, info bool) ([]currency.Conf, error) {
 	segments := make([]string, 0)
 	if label {
 		segments = append(segments, string(currency.LabelMap))
@@ -37,6 +37,9 @@ func (cs *CurrenciesService) Conf(label, symbol, unit, explorer, pairs, methods,
 	}
 	if fees {
 		segments = append(segments, string(currency.FeesMap))
+	}
+	if info {
+		segments = append(segments, string(currency.InfoMap))
 	}
 
 	req := NewRequestWithMethod(path.Join("conf", strings.Join(segments, ",")), "GET")
