@@ -10,14 +10,14 @@ import (
 // combination of Client ID (CID) and the daten for the given
 // CID.
 type MovementRequest struct {
-	Start int64 `json:"start,omitempty"`
-	End   int64 `json:"end,omitempty"`
+	Start *int64 `json:"start,omitempty"`
+	End   *int64 `json:"end,omitempty"`
 }
 
 func (mr *MovementRequest) ToJSON() ([]byte, error) {
 	resp := struct {
-		Start int64 `json:"start,omitempty"`
-		End   int64 `json:"end,omitempty"`
+		Start *int64 `json:"start,omitempty"`
+		End   *int64 `json:"end,omitempty"`
 	}{
 		Start: mr.Start,
 		End:   mr.End,
