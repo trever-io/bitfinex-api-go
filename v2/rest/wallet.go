@@ -86,11 +86,11 @@ func (ws *WalletService) CreateDepositAddress(wallet, method string) (*notificat
 
 // Submits a request to withdraw funds from the given Bitfinex wallet to the given address
 // See https://docs.bitfinex.com/reference#withdraw for more info
-func (ws *WalletService) Withdraw(wallet, method string, amount float64, address string, paymentId string) (*notification.Notification, error) {
+func (ws *WalletService) Withdraw(wallet, method string, amount string, address string, paymentId string) (*notification.Notification, error) {
 	body := map[string]interface{}{
 		"wallet":  wallet,
 		"method":  method,
-		"amount":  strconv.FormatFloat(amount, 'f', -1, 64),
+		"amount":  amount,
 		"address": address,
 	}
 
