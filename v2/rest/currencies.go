@@ -7,6 +7,10 @@ import (
 	"github.com/trever-io/bitfinex-api-go/pkg/models/currency"
 )
 
+type BitfinexCurrenciesService interface {
+	Conf(label, symbol, unit, explorer, pairs, methods, fees, info bool) ([]currency.Conf, error)
+}
+
 // CurrenciesService manages the conf endpoint.
 type CurrenciesService struct {
 	requestFactory

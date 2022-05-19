@@ -8,6 +8,14 @@ import (
 	"github.com/trever-io/bitfinex-api-go/pkg/models/wallet"
 )
 
+type BitfinexWalletService interface {
+	Wallet() (*wallet.Snapshot, error)
+	Transfer(from, to, currency, currencyTo string, amount float64) (*notification.Notification, error)
+	DepositAddress(wallet, method string) (*notification.Notification, error)
+	CreateDepositAddress(wallet, method string) (*notification.Notification, error)
+	Withdraw(wallet, method string, amount string, address string, paymentId string) (*notification.Notification, error)
+}
+
 // WalletService manages data flow for the Wallet API endpoint
 type WalletService struct {
 	requestFactory

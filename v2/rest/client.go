@@ -40,10 +40,10 @@ type Client struct {
 	Trades         TradeService
 	Tickers        TickerService
 	TickersHistory TickerHistoryService
-	Currencies     CurrenciesService
-	Platform       PlatformService
-	Book           BookService
-	Wallet         WalletService
+	currencies     *CurrenciesService
+	platform       *PlatformService
+	book           *BookService
+	wallet         *WalletService
 	Ledgers        LedgerService
 	Stats          StatsService
 	Status         StatusService
@@ -52,9 +52,29 @@ type Client struct {
 	Pulse          PulseService
 	Invoice        InvoiceService
 	Market         MarketService
-	Movement       MovementService
+	movement       *MovementService
 
 	Synchronous
+}
+
+func (c *Client) Wallet() BitfinexWalletService {
+	return c.wallet
+}
+
+func (c *Client) Book() BitfinexBookService {
+	return c.book
+}
+
+func (c *Client) Movement() BitfinexMovementService {
+	return c.movement
+}
+
+func (c *Client) Currencies() BitfinexCurrenciesService {
+	return c.currencies
+}
+
+func (c *Client) Platform() BitfinexPlatformService {
+	return c.platform
 }
 
 // Create a new Rest client
@@ -111,15 +131,15 @@ func NewClientWithSynchronousURLNonce(sync Synchronous, url string, nonce utils.
 		nonce:       nonce,
 	}
 	c.Orders = OrderService{Synchronous: c, requestFactory: c}
-	c.Book = BookService{Synchronous: c}
+	c.book = &BookService{Synchronous: c}
 	c.Candles = CandleService{Synchronous: c}
 	c.Trades = TradeService{Synchronous: c, requestFactory: c}
 	c.Tickers = TickerService{Synchronous: c, requestFactory: c}
 	c.TickersHistory = TickerHistoryService{Synchronous: c, requestFactory: c}
-	c.Currencies = CurrenciesService{Synchronous: c, requestFactory: c}
-	c.Platform = PlatformService{Synchronous: c}
+	c.currencies = &CurrenciesService{Synchronous: c, requestFactory: c}
+	c.platform = &PlatformService{Synchronous: c}
 	c.Positions = PositionService{Synchronous: c, requestFactory: c}
-	c.Wallet = WalletService{Synchronous: c, requestFactory: c}
+	c.wallet = &WalletService{Synchronous: c, requestFactory: c}
 	c.Ledgers = LedgerService{Synchronous: c, requestFactory: c}
 	c.Stats = StatsService{Synchronous: c, requestFactory: c}
 	c.Status = StatusService{Synchronous: c, requestFactory: c}
@@ -128,7 +148,7 @@ func NewClientWithSynchronousURLNonce(sync Synchronous, url string, nonce utils.
 	c.Pulse = PulseService{Synchronous: c, requestFactory: c}
 	c.Invoice = InvoiceService{Synchronous: c, requestFactory: c}
 	c.Market = MarketService{Synchronous: c, requestFactory: c}
-	c.Movement = MovementService{Synchronous: c, requestFactory: c}
+	c.movement = &MovementService{Synchronous: c, requestFactory: c}
 	return c
 }
 
