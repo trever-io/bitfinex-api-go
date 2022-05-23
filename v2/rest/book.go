@@ -10,6 +10,10 @@ import (
 	"github.com/trever-io/bitfinex-api-go/pkg/models/common"
 )
 
+type BitfinexBookService interface {
+	All(symbol string, precision common.BookPrecision, priceLevels int) (*book.Snapshot, error)
+}
+
 type BookService struct {
 	Synchronous
 }

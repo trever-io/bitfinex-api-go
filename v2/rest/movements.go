@@ -5,6 +5,10 @@ import (
 	"github.com/trever-io/bitfinex-api-go/pkg/models/movement"
 )
 
+type BitfinexMovementService interface {
+	Movements(mr *movement.MovementRequest) (*movement.Snapshot, error)
+}
+
 type MovementService struct {
 	requestFactory
 	Synchronous

@@ -1,5 +1,8 @@
 package rest
 
+type BitfinexPlatformService interface {
+	Status() (bool, error)
+}
 type PlatformService struct {
 	Synchronous
 }
